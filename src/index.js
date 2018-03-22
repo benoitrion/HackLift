@@ -48,8 +48,8 @@ app.post('/cars', jsonParser, function(req, res) {
 // PATCH /cars updates a car
 app.patch('/cars/:id', jsonParser, function(req, res) {
     if(!req.body) return res.sendStatus(400)
-    console.log(req.body)
-    CarController.update(CarController.getById(req.params.id), req.body)
+    req.body.uuid = req.params.id
+    CarController.update(req.body)
     res.sendStatus(200)
 })
 
@@ -67,4 +67,4 @@ app.post('/trips', jsonParser, function(req, res) {
     res.sendStatus(200)
 })
 
-app.listen(8080, () => console.log('HackLift app listening on port 9080'))
+app.listen(8080, () => console.log('HackLift app listening on port 8080'))
