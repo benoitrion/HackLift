@@ -7,4 +7,7 @@
  *
  * GET /trips
  */
-export const requestLogger = (req, res, next) => {};
+export const requestLogger = (req, res, next) => {
+    console.log('Request : '+ req.method + " " + req.url)
+    next()
+};
