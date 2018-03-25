@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test socket.io</title>
+</head>
+<body>
+    <h1>Trips Socket.io</h1>
+</body>
+<script src="/socket.io/socket.io.js" ></script>
+<script>
+    var socket = io.connect('http://localhost:8080');
+    socket.on('trips', function (data) {
+        console.log('Data updated : '+ JSON.stringify(data))
+        document.body.innerHTML = '';
+        document.write(JSON.stringify(data));
+    })
+</script>
+</html>
