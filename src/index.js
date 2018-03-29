@@ -18,9 +18,6 @@ var app = express()
 var server = require('http').Server(app)
 var io = require('socket.io')(server)
 
-server.listen(8080)
-
-
 io.on('connection', function (socket) {
     var cars = setInterval(function() {
         var cars = CarController.getAll()
@@ -36,7 +33,7 @@ io.on('connection', function (socket) {
 var jsonParser = bodyParser.json()
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html')
+    res.sendFile(__dirname + '/public/index.html')
 })
 
 // GET /hello gets hello world
@@ -50,7 +47,7 @@ app.post('/hello', authMiddleware, requestLogger, jsonParser, function (req, res
 
 // GET /cars return all the cars
 app.get('/cars', requestLogger, function(req, res) {
-    res.sendFile(__dirname + '/cars.html')
+    res.sendFile(__dirname + '/public/cars.html')
 })
 
 // GET /cars/:id return the car with the id the user passes, eg: /car/52
@@ -77,7 +74,7 @@ app.patch('/cars/:id', jsonParser, authMiddleware, requestLogger, function(req, 
 
 // GET /trips return all the trips
 app.get('/trips', requestLogger, function(req, res) {
-    res.sendFile(__dirname + '/trips.html')
+    res.sendFile(__dirname + '/public/trips.html')
 })
 
 // POST /trips creates a new trip
@@ -88,4 +85,4 @@ app.post('/trips', jsonParser, authMiddleware, requestLogger, function(req, res)
     res.sendStatus(200)
 })
 
-//app.listen(8080, () => console.log('HackLift app listening on port 8080'))
+server.listen(8080, () => console.log('HackLift app listening on port 8080'))
